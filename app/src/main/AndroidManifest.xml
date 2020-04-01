@@ -9,6 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".danger_zones"></activity>
+        <activity android:name=".analysis_module" />
+        <activity android:name=".manage_data" />
+        <activity android:name=".credit_card_input" />
+        <activity android:name=".receipt_input" />
+        <activity android:name=".manual_input" />
+        <activity android:name=".import_home" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
