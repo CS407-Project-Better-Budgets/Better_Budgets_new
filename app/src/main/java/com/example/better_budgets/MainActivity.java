@@ -2,20 +2,35 @@ package com.example.better_budgets;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
     public static Boolean danger_zone = false;
+    public SQLiteDatabase sqLiteDatabase;
+    public DBHelper helper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView summary = (TextView)findViewById(R.id.summary);
 
+
+        Context context = getApplicationContext();
+        sqLiteDatabase = context.openOrCreateDatabase("spending", Context.MODE_PRIVATE, null);
+        helper = new DBHelper(sqLiteDatabase);
+        TextView summary = (TextView)findViewById(R.id.summary);
         summary.setText(make_summary());
 
         //the switch for danger zone
@@ -55,9 +70,66 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public String getDate(){
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        return dateFormat.format(date).substring(0,11).replaceAll("/","-");
+    }
+
     public String make_summary(){
-        String summary = "awaiting for implementation";
+        String summary = "";
+        //!!!!possible problems: Float and double
         //to do: get the spending data from database and build the string
+        //get total spending
+        Cursor c = sqLiteDatabase.rawQuery(String.format("SELECT * from spending where date like '%s'", getDate().substring(0,8)), null);
+        int idIndex = c.getColumnIndex("id");
+        int sourceIndex = c.getColumnIndex("source");
+        int dateIndex = c.getColumnIndex("date");
+        int amountIndex = c.getColumnIndex("amount");
+        int sellerIndex = c.getColumnIndex("seller");
+
+        c.moveToFirst();
+        ArrayList<Spending> datalist = new ArrayList<>();
+
+        while ( (!c.isAfterLast())){
+            String id = c.getString(idIndex);
+            String source = c.getString(sourceIndex);
+            String date = c.getString(dateIndex);
+            float amount = c.getFloat(amountIndex);
+            String seller = c.getString(sellerIndex);
+
+            Spending spending = new Spending(id,date,source,amount,seller);
+            datalist.add(spending);
+            c.moveToNext();
+        }
+        if(datalist.size()==0){
+            summary = String.format("Total Spending this month: $%d \nYour top spending: %s", 0, "N/A");
+            return summary;
+        }
+        c.close();
+        double total = 0;
+        ArrayList<Double> spending = new ArrayList<Double>();
+        ArrayList<String> sellers = new ArrayList<String>();
+        for (int i = 0; i < datalist.size(); i ++){
+            total += datalist.get(i).getAmount();
+            int index = sellers.indexOf(datalist.get(i).getSeller());
+            if(index != -1){
+                spending.set(index,new Double(spending.get(index).doubleValue() + datalist.get(i).getAmount()));
+            }
+            else{
+                spending.add(new Double(datalist.get(i).getAmount()));
+                sellers.add(datalist.get(i).getSeller());
+            }
+
+        }
+        double max_amount = spending.get(0).doubleValue();
+        for (int j = 0; j < spending.size(); j++){
+            if (max_amount < spending.get(j)){
+                max_amount = spending.get(j);
+            }
+        }
+        String max_seller = sellers.get(spending.indexOf(new Double(max_amount)));
+        summary = String.format("Total Spending this month: $%d \nYour top spending: %s", total, max_seller);
         return summary;
     }
 
