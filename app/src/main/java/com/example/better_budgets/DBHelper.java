@@ -18,7 +18,7 @@ public class DBHelper {
 
     //database setup
     public void createTable() {
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS spending " + "(id TEXT PRIMARY KEY, source TEXT, date TEXT, amount FLOAT, seller TEXT)");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS spending" + " (id TEXT PRIMARY KEY, source TEXT, date TEXT, amount FLOAT, seller TEXT, receipt_id TEXT)");
 
     }
 
@@ -32,8 +32,8 @@ public class DBHelper {
         createTable();
         sqLiteDatabase.execSQL(String.format("DELETE FROM spending WHERE id = %s", id));
     }
-    public void updateData(String id, String source, String date, float amount, String seller){
+    public void updateData(String id, String source, String date, float amount, String seller, String receipt_id){
         createTable();
-        sqLiteDatabase.execSQL(String.format("UPDATE spending set source = '%s', date = '%s' , amount = '%s', seller = '%f' where id = '%s'", source, date, amount, seller, id));
+        sqLiteDatabase.execSQL(String.format("UPDATE spending set source = '%s', date = '%s' , amount = '%s', seller = '%f', receipt_id = '%s' where id = '%s'", source, date, amount, seller, receipt_id, id));
     }
 }
