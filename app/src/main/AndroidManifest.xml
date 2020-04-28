@@ -9,7 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".danger_zones"></activity>
+        <activity android:name=".manage_data_seller"></activity>
+        <activity android:name=".manage_data_amount" />
+        <activity android:name=".manage_data_date" />
+        <activity android:name=".manage_data_source" />
+        <activity android:name=".manage_data_id" />
+        <activity android:name=".manage_data_all" />
+        <activity android:name=".danger_zones" />
         <activity android:name=".analysis_module" />
         <activity android:name=".manage_data" />
         <activity android:name=".credit_card_input" />
