@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".edit_input"></activity>
+        <activity android:name=".danger_zone_entry"></activity>
+        <activity android:name=".edit_input" />
         <activity android:name=".credit_card_input_list" />
         <activity
             android:name=".show_spending_list_credit"

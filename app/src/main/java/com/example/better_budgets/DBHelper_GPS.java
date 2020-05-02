@@ -25,7 +25,7 @@ public class DBHelper_GPS {
         createTable();
         sqLiteDatabase.execSQL(String.format("DELETE FROM danger_zones WHERE name = %s", name));
     }
-    public void updateData(String name, String address, String latitude, float longitude){
+    public void updateData(String name, String address, float latitude, float longitude){
         createTable();
         sqLiteDatabase.execSQL(String.format("UPDATE danger_zones set address = '%s' , latitude = '%f', longitude = '%f' where name = '%s'", address, latitude, longitude,name));
     }
