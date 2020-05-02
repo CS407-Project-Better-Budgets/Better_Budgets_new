@@ -1,12 +1,16 @@
 package com.example.better_budgets;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.icu.text.SimpleDateFormat;
@@ -49,7 +53,8 @@ public class credit_card_input extends AppCompatActivity {
         int month = Integer.parseInt(month_entry.getText().toString());
         EditText day_entry = (EditText) findViewById(R.id.day_entry);
         int day = Integer.parseInt(day_entry.getText().toString());
-        show_data(read_msg(phone_number, year, month, day));
+        read_msg(phone_number, year, month, day);
+        //show_data(read_msg(phone_number, year, month, day));
     }
 
     public void back_last(View view){
@@ -60,6 +65,7 @@ public class credit_card_input extends AppCompatActivity {
         //boolean val = false;
         String msg;
         ArrayList <String> msg_list = obtainPhoneMessage(phone_num);
+        //Toast.makeText(this, msg_list.get(0),Toast.LENGTH_LONG).show();
         ArrayList <Spending> spd_list = new ArrayList<Spending>();
         for (int i = 0; i < msg_list.size(); i ++){
             msg = msg_list.get(i);
@@ -156,15 +162,28 @@ public class credit_card_input extends AppCompatActivity {
 
     private ArrayList<String> obtainPhoneMessage(String phone_num) {
         //ArrayList<String> date_list = new ArrayList<String>();
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_SMS)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_SMS},
+                    1);
+
+        }
+        Toast.makeText(this, "Your APP sucks",Toast.LENGTH_LONG).show();
+
+
         ArrayList<String> msg_list = new ArrayList<String>();
 
         ContentResolver cr = getContentResolver();
         String[] projection = new String[]{"_id", "address", "person", "body", "date", "type"};
         Cursor cur = cr.query(SMS_INBOX, projection, null, null, "date desc");
         if (null == cur) {
+            Toast.makeText(this, "Your APP sucks",Toast.LENGTH_LONG).show();
             Log.i("ooc", "************cur == null");
             return msg_list ;
         }
+        Toast.makeText(this, "Your APP sucks",Toast.LENGTH_LONG).show();
         while (cur.moveToNext()) {
             String number = cur.getString(cur.getColumnIndex("address"));
             //String name = cur.getString(cur.getColumnIndex("person"));
