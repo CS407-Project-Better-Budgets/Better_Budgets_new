@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.better_budgets">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,12 +14,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".manage_data_seller"></activity>
-        <activity android:name=".manage_data_amount" />
-        <activity android:name=".manage_data_date" />
-        <activity android:name=".manage_data_source" />
-        <activity android:name=".manage_data_id" />
-        <activity android:name=".manage_data_all" />
+        <activity android:name=".danger_zone_entry"></activity>
+        <activity android:name=".edit_input" />
+        <activity android:name=".credit_card_input_list" />
+        <activity
+            android:name=".show_spending_list_credit"
+            android:label="@string/title_activity_show_spending_list_credit"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".data_saved"
+            android:label="@string/title_activity_data_saved"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.android.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity android:name=".gallery_receipt" />
+        <activity android:name=".camera" />
         <activity android:name=".danger_zones" />
         <activity android:name=".analysis_module" />
         <activity android:name=".manage_data" />

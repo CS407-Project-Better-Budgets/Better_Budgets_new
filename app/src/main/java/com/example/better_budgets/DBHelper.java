@@ -18,21 +18,22 @@ public class DBHelper {
 
     //database setup
     public void createTable() {
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS spending " + "(id TEXT PRIMARY KEY, source TEXT, date TEXT, amount FLOAT, seller TEXT)");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS spending" + " (id TEXT PRIMARY KEY, source TEXT, date TEXT, amount DOUBLE, seller TEXT)");
 
     }
 
-    public void addData(String id, String source, String date, float amount, String seller){
+    public void addData(String id, String source, String date, double amount, String seller){
         createTable();
         sqLiteDatabase.execSQL(String.format("INSERT INTO spending (id, source, date, amount, seller) VALUES ('%s','%s','%s','%f','%s')", id, source, date, amount, seller));
+        //return String.format("INSERT INTO spending (id, source, date, amount, seller) VALUES ('%s','%s','%s','%f','%s')", id, source, date, amount, seller);
     }
 
     public void deleteData(String id){
         createTable();
         sqLiteDatabase.execSQL(String.format("DELETE FROM spending WHERE id = %s", id));
     }
-    public void updateData(String id, String source, String date, float amount, String seller){
+    public void updateData(String id, String source, String date, double amount, String seller){
         createTable();
-        sqLiteDatabase.execSQL(String.format("UPDATE spending set source = '%s', date = '%s' , amount = '%s', seller = '%f' where id = '%s'", source, date, amount, seller, id));
+        sqLiteDatabase.execSQL(String.format("UPDATE spending set source = '%s', date = '%s' , amount = '%f', seller = '%s' where id = '%s'", source, date, amount, seller, id));
     }
 }

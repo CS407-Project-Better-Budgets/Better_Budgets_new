@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -81,7 +82,13 @@ public class MainActivity extends AppCompatActivity {
         //!!!!possible problems: Float and double
         //to do: get the spending data from database and build the string
         //get total spending
-        Cursor c = sqLiteDatabase.rawQuery(String.format("SELECT * from spending where date like '%s'", getDate().substring(0,8)), null);
+
+        String year = getDate().substring(0,4);
+        String month = getDate().substring(5,7);
+        //Toast.makeText(this,year+" "+month, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this,year+month,Toast.LENGTH_LONG).show();
+        //Cursor c = sqLiteDatabase.rawQuery(String.format("SELECT * from spending"), null);
+        Cursor c = sqLiteDatabase.rawQuery(String.format("SELECT * from spending"), null);
         int idIndex = c.getColumnIndex("id");
         int sourceIndex = c.getColumnIndex("source");
         int dateIndex = c.getColumnIndex("date");
@@ -95,15 +102,24 @@ public class MainActivity extends AppCompatActivity {
             String id = c.getString(idIndex);
             String source = c.getString(sourceIndex);
             String date = c.getString(dateIndex);
-            float amount = c.getFloat(amountIndex);
+            //Toast.makeText(this,date, Toast.LENGTH_LONG).show();
+            double amount = c.getDouble(amountIndex);
             String seller = c.getString(sellerIndex);
-
+            if(!date.substring(4).equals(year)){
+                c.moveToNext();
+                continue;
+            }
+            if(!date.substring(0,2).equals(month)){
+                c.moveToNext();
+                continue;
+            }
             Spending spending = new Spending(id,date,source,amount,seller);
             datalist.add(spending);
             c.moveToNext();
         }
         if(datalist.size()==0){
             summary = String.format("Total Spending this month: $%d \nYour top spending: %s", 0, "N/A");
+
             return summary;
         }
         c.close();
@@ -129,8 +145,12 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         String max_seller = sellers.get(spending.indexOf(new Double(max_amount)));
-        summary = String.format("Total Spending this month: $%d \nYour top spending: %s", total, max_seller);
+
+
+        summary = String.format("Total Spending this month: $%.2f \nYour top spending: %s", total, max_seller);
         return summary;
+
+
     }
 
 
