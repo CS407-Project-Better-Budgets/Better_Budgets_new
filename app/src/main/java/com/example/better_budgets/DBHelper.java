@@ -3,7 +3,7 @@ package com.example.better_budgets;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-
+import java.util.ArrayList;
 
 
 public class DBHelper {
@@ -35,5 +35,35 @@ public class DBHelper {
     public void updateData(String id, String source, String date, double amount, String seller){
         createTable();
         sqLiteDatabase.execSQL(String.format("UPDATE spending set source = '%s', date = '%s' , amount = '%f', seller = '%s' where id = '%s'", source, date, amount, seller, id));
+    }
+
+    public ArrayList<Spending> showData() {
+        createTable();
+        Cursor c = sqLiteDatabase.rawQuery(String.format("SELECT * from spendings"), null);
+
+        int idIndex = c.getColumnIndex("id");
+        int dateIndex = c.getColumnIndex("date");
+        int sourceIndex = c.getColumnIndex("source");
+        int amountIndex = c.getColumnIndex("amount");
+        int sellerIndex = c.getColumnIndex("seller");
+
+        c.moveToFirst();
+
+        ArrayList<Spending> spendingList = new ArrayList<>();
+
+        while (!c.isAfterLast()) {
+            String id = c.getString(idIndex);
+            String date = c.getString(dateIndex);
+            String source = c.getString(sourceIndex);
+            double amount = c.getDouble(amountIndex);
+            String seller = c.getString(sellerIndex);
+
+            Spending spending = new Spending(id, date, source, amount, seller);
+            spendingList.add(spending);
+            c.moveToNext();
+        }
+        c.close();
+        sqLiteDatabase.close();
+        return spendingList;
     }
 }
