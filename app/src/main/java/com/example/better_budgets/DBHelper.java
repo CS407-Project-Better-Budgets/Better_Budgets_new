@@ -27,7 +27,6 @@ public class DBHelper {
         sqLiteDatabase.execSQL(String.format("INSERT INTO spending (id, source, date, amount, seller) VALUES ('%s','%s','%s','%f','%s')", id, source, date, amount, seller));
     }
 
-
     public void deleteData(String id){
         createTable();
         sqLiteDatabase.execSQL(String.format("DELETE FROM spending WHERE id = %s", id));

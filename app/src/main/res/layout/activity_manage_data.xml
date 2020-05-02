@@ -13,6 +13,7 @@
         android:layout_marginTop="40dp"
         android:text="Manage Input"
         android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toEndåOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,14 +34,13 @@
 
     <TextView
         android:id="@+id/textView_description"
-        android:layout_width="360dp"
-        android:layout_height="150dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="300dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="16dp"
         android:text="You can narrow the results down by clicking the buttons below \n\n\n Search inputs by:"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/button_id"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
