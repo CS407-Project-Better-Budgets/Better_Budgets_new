@@ -9,50 +9,32 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-public class danger_zones extends AppCompatActivity {
+public class manage_data_seller extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_danger_zones);
+        setContentView(R.layout.activity_manage_data_seller);
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.danger_zone_menu, menu);
+        inflater.inflate(R.menu.manage_data_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.go_home:
-                goToMainActivity();
-                return true;
-            case R.id.add_danger_zone:
-                goToDangerZoneEntry();
-                return true;
+            case R.id.item_goto_data_management:
+                Intent intent = new Intent(this, manage_data.class);
+                startActivity(intent);
+            case R.id.item_goto_main_activity:
+                Intent intent2 = new Intent(this, MainActivity.class);
+                startActivity(intent2);
             default: return super.onOptionsItemSelected(item);
         }
 
-    }
-
-
-
-    public void goToMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-
-        startActivity(intent);
-    }
-
-    public void goToDangerZoneEntry() {
-        Intent intent = new Intent(this, danger_zone_entry.class);
-
-        intent.putExtra("locationID", "");
-
-        startActivity(intent);
     }
 }
