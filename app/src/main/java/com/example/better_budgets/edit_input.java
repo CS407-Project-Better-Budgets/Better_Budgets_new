@@ -33,6 +33,8 @@ public class edit_input extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_edit_input);
         SharedPreferences sharedPreferences = getSharedPreferences("com.example.better_budgets", Context.MODE_PRIVATE);
         Intent intent = getIntent();
         int position = intent.getIntExtra("position", 0);
@@ -40,7 +42,6 @@ public class edit_input extends AppCompatActivity {
 
         EditText spending = (EditText) findViewById(R.id.spending_edit);
         spending.setText(sharedPreferences.getString("display"+position,""));
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_input);
+
     }
 }
