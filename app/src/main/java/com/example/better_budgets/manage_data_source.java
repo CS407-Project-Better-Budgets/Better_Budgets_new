@@ -19,10 +19,6 @@ public class manage_data_source extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_data_source);
-
-        button = (Button) findViewById(R.id.button_md_source_camera);
-        button.setText("hi");
-
     }
 
     @Override

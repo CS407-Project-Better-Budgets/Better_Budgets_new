@@ -10,8 +10,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -24,10 +27,16 @@ public class manage_data_all extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_data_all);
 
+        TextView title = findViewById(R.id.textView_md_all_title);
+
+
         Context context = getApplicationContext();
         SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("spending", Context.MODE_PRIVATE, null);
 
+
+
         DBHelper dbHelper = new DBHelper(sqLiteDatabase);
+
         spendings = dbHelper.showData();
 
         ArrayList<String> displaySpendings = new ArrayList<>();
@@ -39,6 +48,16 @@ public class manage_data_all extends AppCompatActivity {
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, displaySpendings);
         ListView listView = (ListView) findViewById(R.id.list_md_all_spending);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), edit_input.class);
+                intent.putExtra("id", position);
+
+                startActivity(intent);
+            }
+        });
     }
 
 
