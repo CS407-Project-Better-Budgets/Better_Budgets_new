@@ -63,14 +63,8 @@ public class analysis_module extends AppCompatActivity {
             dataEntries.add(new ValueDataEntry(spending.getSeller(), spending.getAmount()));
         }
 
-       // for(int i = 0; i < months.length; i++){
-         //   dataEntries.add(new ValueDataEntry(months[i], spending[i]));
-       // }
-
         pie.data(dataEntries);
         anyChartView.setChart(pie);
-
-
     }
 
     public void back_main (View view){
