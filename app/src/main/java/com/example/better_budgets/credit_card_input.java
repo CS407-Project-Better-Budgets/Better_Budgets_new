@@ -61,7 +61,8 @@ public class credit_card_input extends AppCompatActivity {
     }
 
     public void back_last(View view){
-
+        Intent intent = new Intent(getApplicationContext(),import_home.class);
+        startActivity(intent);
     }
 
     public ArrayList<Spending> read_msg(String phone_num, int year_be, int month_be, int day_be){

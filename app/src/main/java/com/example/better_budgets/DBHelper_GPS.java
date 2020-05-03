@@ -23,7 +23,7 @@ public class DBHelper_GPS {
 
     public void deleteData(String name){
         createTable();
-        sqLiteDatabase.execSQL(String.format("DELETE FROM danger_zones WHERE name = %s", name));
+        sqLiteDatabase.execSQL(String.format("DELETE FROM danger_zones WHERE name = '%s'", name));
     }
     public void updateData(String name, String address, float latitude, float longitude){
         createTable();
