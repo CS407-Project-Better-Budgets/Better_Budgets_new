@@ -37,7 +37,7 @@ public class manage_data_all extends AppCompatActivity {
         DBHelper dbHelper = new DBHelper(sqLiteDatabase);
 
 
-        spendings = dbHelper.showData();
+        spendings = dbHelper.showData_all();
 
         ArrayList<String> displaySpendings = new ArrayList<>();
         for (Spending spending: spendings) {

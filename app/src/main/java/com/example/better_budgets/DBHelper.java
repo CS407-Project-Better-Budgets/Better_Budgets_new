@@ -37,7 +37,7 @@ public class DBHelper {
         sqLiteDatabase.execSQL(String.format("UPDATE spending set source = '%s', date = '%s' , amount = '%f', seller = '%s' where id = '%s'", source, date, amount, seller, id));
     }
 
-    public ArrayList<Spending> showData() {
+    public ArrayList<Spending> showData_all() {
         createTable();
 
         Cursor c = sqLiteDatabase.rawQuery(String.format("SELECT * from spending"), null);
