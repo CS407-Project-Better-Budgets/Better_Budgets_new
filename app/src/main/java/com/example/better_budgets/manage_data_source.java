@@ -75,37 +75,7 @@ public class manage_data_source extends AppCompatActivity {
 
         ArrayList<String> displaySpendings = new ArrayList<>();
         for (Spending spending: spendings) {
-            if (spending.getSource().equalsIgnoreCase("message")) {
-                displaySpendings.add(String.format("id:%s\nDate:%s\nSource:%s\nAmount:%f\nSeller:%s", spending.getId(), spending.getDate(), spending.getSource(), spending.getAmount(), spending.getSeller()));
-            }
-        }
-
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, displaySpendings);
-        ListView listView = (ListView) findViewById(R.id.list_md_source_spending);
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), manage_data_source_edit.class);
-                intent.putExtra("spendingid", position);
-
-                startActivity(intent);
-            }
-        });
-    }
-
-    public void cameraOnClick(View view){
-        Context context = getApplicationContext();
-        SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("spending", Context.MODE_PRIVATE, null);
-
-        DBHelper dbHelper = new DBHelper(sqLiteDatabase);
-
-        spendings = dbHelper.showData_all();
-
-        ArrayList<String> displaySpendings = new ArrayList<>();
-        for (Spending spending: spendings) {
-            if (spending.getSource().equalsIgnoreCase("camera")) {
+            if (spending.getSource().equalsIgnoreCase("credit_card")) {
                 displaySpendings.add(String.format("id:%s\nDate:%s\nSource:%s\nAmount:%f\nSeller:%s", spending.getId(), spending.getDate(), spending.getSource(), spending.getAmount(), spending.getSeller()));
             }
         }

@@ -20,32 +20,19 @@
 
 
     <Button
-        android:id="@+id/button_md_source_camera"
+        android:id="@+id/button_md_source_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
-        android:text="Camera"
-        android:onClick="cameraOnClick"
-        app:layout_constraintBottom_toTopOf="@+id/list_md_source_spending"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_md_source_title" />
-
-    <Button
-        android:id="@+id/button_md_source_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
-        android:text="Message"
         android:onClick="messageOnClick"
+        android:text="Credit Card"
         app:layout_constraintBottom_toTopOf="@+id/list_md_source_spending"
         app:layout_constraintEnd_toStartOf="@+id/button_md_source_manual"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button_md_source_camera"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_md_source_title"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintVertical_bias="0.463" />
 
     <Button
         android:id="@+id/button_md_source_manual"
