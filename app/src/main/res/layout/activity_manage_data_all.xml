@@ -10,6 +10,7 @@
         android:id="@+id/textView_md_all_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="View all inputs"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,9 +21,10 @@
 
     <ListView
         android:id="@+id/list_md_all_spending"
-        android:layout_width="300dp"
-        android:layout_height="500dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="336dp"
+        android:layout_height="457dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
