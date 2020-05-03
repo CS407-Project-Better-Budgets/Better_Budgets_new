@@ -39,7 +39,7 @@ public class DBHelper {
 
     public ArrayList<Spending> showData() {
         createTable();
-        Cursor c = sqLiteDatabase.rawQuery(String.format("SELECT * from spendings"), null);
+        Cursor c = sqLiteDatabase.rawQuery(String.format("SELECT * from spending"), null);
 
         int idIndex = c.getColumnIndex("id");
         int dateIndex = c.getColumnIndex("date");
