@@ -63,7 +63,7 @@ public class DBHelper {
             c.moveToNext();
         }
         c.close();
-        sqLiteDatabase.close();
+
         return spendingList;
     }
 }

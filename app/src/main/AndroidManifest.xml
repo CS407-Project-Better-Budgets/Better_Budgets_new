@@ -41,6 +41,12 @@
         <activity android:name=".danger_zones" />
         <activity android:name=".analysis_module" />
         <activity android:name=".manage_data" />
+        <activity android:name=".manage_data_all" />
+        <activity android:name=".manage_data_amount" />
+        <activity android:name=".manage_data_date" />
+        <activity android:name=".manage_data_id" />
+        <activity android:name=".manage_data_seller" />
+        <activity android:name=".manage_data_source" />
         <activity android:name=".credit_card_input" />
         <activity android:name=".receipt_input" />
         <activity android:name=".manual_input" />

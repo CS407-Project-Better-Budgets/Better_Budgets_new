@@ -8,13 +8,21 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Button;
 
 public class manage_data_source extends AppCompatActivity {
+
+    private Button button;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_data_source);
+
+        button = (Button) findViewById(R.id.button_md_source_camera);
+        button.setText("hi");
+
     }
 
     @Override
