@@ -57,8 +57,8 @@ public class manage_data_source extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), edit_input.class);
-                intent.putExtra("spendid", position);
+                Intent intent = new Intent(getApplicationContext(), manage_data_source_edit.class);
+                intent.putExtra("spendingid", position);
 
                 startActivity(intent);
             }
@@ -87,8 +87,8 @@ public class manage_data_source extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), edit_input.class);
-                intent.putExtra("spendid", position);
+                Intent intent = new Intent(getApplicationContext(), manage_data_source_edit.class);
+                intent.putExtra("spendingid", position);
 
                 startActivity(intent);
             }
@@ -118,7 +118,7 @@ public class manage_data_source extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(), manage_data_source_edit.class);
-                intent.putExtra("spendid", position);
+                intent.putExtra("spendingid", position);
 
                 startActivity(intent);
             }
