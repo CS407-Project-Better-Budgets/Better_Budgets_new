@@ -27,16 +27,10 @@ public class manage_data_all extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_data_all);
 
-        TextView title = findViewById(R.id.textView_md_all_title);
-
-
         Context context = getApplicationContext();
         SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("spending", Context.MODE_PRIVATE, null);
 
-
         DBHelper dbHelper = new DBHelper(sqLiteDatabase);
-
-
         spendings = dbHelper.showData_all();
 
         ArrayList<String> displaySpendings = new ArrayList<>();
@@ -52,8 +46,8 @@ public class manage_data_all extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), edit_input.class);
-                intent.putExtra("id", position);
+                Intent intent = new Intent(getApplicationContext(), manage_data_all_edit.class);
+                intent.putExtra("spendingid", position);
 
                 startActivity(intent);
             }
