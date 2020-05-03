@@ -215,6 +215,11 @@ public class MainActivity extends AppCompatActivity {
                     currentLocation.setLng(String.valueOf(mLastKnownLocation.getLongitude()));
                 }
             });
+
+            if (currentLocation.getLat() == null ||
+                    currentLocation.getLng() == null) {
+                return;
+            }
             Context context = getApplicationContext();
             SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("danger_zones",
                     Context.MODE_PRIVATE, null);
@@ -223,13 +228,9 @@ public class MainActivity extends AppCompatActivity {
             dbHelper_gps.createTable();
             locations = dbHelper_gps.readLocations();
             for (Location location : locations) {
-                if (currentLocation.getLat() == null ||
-                        currentLocation.getLng() == null) {
-                    return;
-                }
                 if (Math.abs(distance(Double.parseDouble(currentLocation.getLat()),
                         Double.parseDouble(currentLocation.getLng()),
-                        (double) location.getLatitude(), (double) location.getLongitude(), "M")) < 0.5) {
+                        (double) location.getLatitude(), (double) location.getLongitude(), "M")) < 0.3) {
                     sendOnChannel1();
                 }
             }
