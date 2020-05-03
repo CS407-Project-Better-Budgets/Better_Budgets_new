@@ -37,10 +37,7 @@ public class import_home extends AppCompatActivity {
                 Intent intent = new Intent(this, manual_input.class);
                 startActivity(intent);
             }
-            else{
-                Intent intent = new Intent(this, receipt_input.class);
-                startActivity(intent);
-            }
+
         }
     }
 }

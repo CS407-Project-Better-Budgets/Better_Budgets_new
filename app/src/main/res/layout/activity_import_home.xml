@@ -42,16 +42,6 @@
 
 
         <RadioButton
-            android:id="@+id/receipt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="receipt"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@id/manual"
-            app:layout_constraintLeft_toLeftOf="@id/credit_card"
-            app:layout_constraintTop_toBottomOf="@id/credit_card" />
-
-        <RadioButton
             android:id="@+id/manual"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

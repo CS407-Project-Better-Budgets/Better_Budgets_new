@@ -28,19 +28,46 @@ public class credit_card_input_list extends AppCompatActivity {
         Intent intent = getIntent();
         int size = intent.getIntExtra("size",0);
         DBHelper dbHelper = new DBHelper(sqLiteDatabase);
+        //Toast.makeText(this, Integer.toString(size), Toast.LENGTH_SHORT).show();
+        for (int i = 0; i < size; i++) {
+            String entry = sharedPreferences.getString("display" + i, "");
+            entry = entry.replace(","," ");
+            Scanner scan = new Scanner(entry);
+
+            String seller = scan.next();
+            double amount = Double.parseDouble(scan.next());
+            String date = scan.next();
+            //Toast.makeText(this, Double.toString(amount), Toast.LENGTH_SHORT).show();
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            String id = dtf.format(now).replaceAll(" ", "")+Integer.toString(i);
+            dbHelper.addData(id,"credit_card",date,amount,seller);
+            //Toast.makeText(this,dbHelper.addData(id,"credit_card",date,amount,seller),Toast.LENGTH_LONG).show();
+        }
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+        Toast.makeText(this,"Your Data have been recorded",Toast.LENGTH_LONG).show();
+        Intent new_intent = new Intent(getApplicationContext(),import_home.class);
+        startActivity(new_intent);
+
+        /*
         for (int i = 0; i < size; i++){
             String entry = sharedPreferences.getString("display"+i,"");
             if(!entry.equals("")){
-                entry = entry.replace(",","");
+                entry = entry.replace(","," ");
                 Scanner scan = new Scanner(entry);
 
                 String seller = scan.next();
-                float amount = Float.parseFloat(scan.next());
+                double amount = Double.parseDouble(scan.next());
                 String date = scan.next();
+                Toast.makeText(this, Double.toString(amount), Toast.LENGTH_SHORT);
+                Toast.makeText(this, seller, Toast.LENGTH_SHORT);
+                Toast.makeText(this, date, Toast.LENGTH_SHORT);
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
                 LocalDateTime now = LocalDateTime.now();
                 String id = dtf.format(now).replaceAll(" ", "")+Integer.toString(i);
-                dbHelper.addData(id,"credit_card",date,amount,seller);
+                //dbHelper.addData(id,"credit_card",date,amount,seller);
 
             }
         }
@@ -50,10 +77,14 @@ public class credit_card_input_list extends AppCompatActivity {
         Toast.makeText(this,"Your Data have been recorded",Toast.LENGTH_LONG).show();
         Intent new_intent = new Intent(getApplicationContext(),import_home.class);
         startActivity(new_intent);
+
+         */
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_credit_card_input_list);
         Context context = getApplicationContext();
         sqLiteDatabase = context.openOrCreateDatabase("spending", Context.MODE_PRIVATE, null);
         ArrayList<String> list = new ArrayList<String>();
@@ -76,7 +107,7 @@ public class credit_card_input_list extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_credit_card_input_list);
+
+
     }
 }
