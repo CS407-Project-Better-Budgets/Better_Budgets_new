@@ -34,8 +34,8 @@ public class manage_data_all extends AppCompatActivity {
         SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("spending", Context.MODE_PRIVATE, null);
 
 
-
         DBHelper dbHelper = new DBHelper(sqLiteDatabase);
+
 
         spendings = dbHelper.showData();
 
