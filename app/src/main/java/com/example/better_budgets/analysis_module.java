@@ -28,8 +28,6 @@ public class analysis_module extends AppCompatActivity {
     AnyChartView anyChartView;
 
     public static ArrayList<Spending> spendings = new ArrayList<>();
-    //ArrayList <String> months = new ArrayList<>();
-    //ArrayList <Integer> spent = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +52,15 @@ public class analysis_module extends AppCompatActivity {
         Date date = new Date();
         String id = sdf.format(date);
 
-        spendings = new DBHelper(sqLiteDatabase).
+        spendings = new DBHelper(sqLiteDatabase).showData();
 
-       // ArrayList<String> displayNotes = new ArrayList<>();
+        if(spendings.isEmpty()){
+            dataEntries.add(new ValueDataEntry("Example 1", 300 ));
+            dataEntries.add(new ValueDataEntry("Example 2", 900 ));
+        }
+
         for (Spending spending : spendings) {
             dataEntries.add(new ValueDataEntry(spending.getSeller(), spending.getAmount()));
-            //displayNotes.add(String.format("Title:%s\nDate:%s", note.getTitle(), note.getDate()));
         }
 
        // for(int i = 0; i < months.length; i++){
