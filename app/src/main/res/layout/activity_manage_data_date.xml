@@ -39,7 +39,7 @@
         android:layout_marginTop="60dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="MM"
+        android:hint="MM"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_md_date_title" />
 
@@ -50,8 +50,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="60dp"
         android:ems="10"
+        android:hint="DD"
         android:inputType="textPersonName"
-        android:text="DD"
         app:layout_constraintStart_toEndOf="@+id/editText_md_date_month"
         app:layout_constraintTop_toBottomOf="@+id/textView_md_date_title" />
 
@@ -63,22 +63,37 @@
         android:layout_marginTop="60dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="YYYY"
+        android:hint="YYYY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/editText_md_date_date"
         app:layout_constraintTop_toBottomOf="@+id/textView_md_date_title" />
+
+    <Button
+        android:id="@+id/button_md_date_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Search"
+        android:onClick="searchOnClick"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_md_date_date" />
 
 
     <ListView
         android:id="@+id/list_md_date_spending"
         android:layout_width="300dp"
         android:layout_height="400dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_md_date_month" />
+        app:layout_constraintTop_toBottomOf="@+id/button_md_date_search" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

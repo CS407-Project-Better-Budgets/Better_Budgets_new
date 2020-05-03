@@ -1,11 +1,20 @@
 package com.example.better_budgets;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.Manifest;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,17 +25,26 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 public class MainActivity extends AppCompatActivity {
     public static Boolean danger_zone = false;
     public SQLiteDatabase sqLiteDatabase;
     public DBHelper helper;
+    private NotificationManagerCompat notificationManager;
+    private ArrayList<Location> locations = new ArrayList<>();
+    private FusedLocationProviderClient mFusedLocationProviderClient;
+    private LatitudeLongitude currentLocation = new LatitudeLongitude();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        notificationManager = NotificationManagerCompat.from(this);
 
         Context context = getApplicationContext();
         sqLiteDatabase = context.openOrCreateDatabase("spending", Context.MODE_PRIVATE, null);
@@ -42,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 if(danger_zone){
                     TextView danger_switch_text = (TextView)findViewById(R.id.danger_switch_text);
                     danger_switch_text.setText("Danger zone function: on");
+                    enteredDangerZone();
                 }
                 else{
                     TextView danger_switch_text = (TextView)findViewById(R.id.danger_switch_text);
@@ -151,6 +170,106 @@ public class MainActivity extends AppCompatActivity {
         return summary;
 
 
+    }
+
+    public void sendOnChannel1() {
+        String title = "You have entered a Danger Zone";
+        String message = "Watch out! You are in a Danger Zone!";
+        Intent activityIntent = new Intent(this, MainActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this,
+                0, activityIntent, 0);
+
+        Intent broadcastIntent = new Intent(this, NotificationReceiver.class);
+        broadcastIntent.putExtra("toastMessage", message);
+        PendingIntent actionIntent = PendingIntent.getBroadcast(this,
+                0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+        Notification notification = new NotificationCompat.Builder(this, "channel1")
+                .setSmallIcon(R.drawable.ic_priority_high_black_24dp)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setColor(Color.BLUE)
+                .setContentIntent(contentIntent)
+                .setAutoCancel(true)
+                .setOnlyAlertOnce(true)
+                .addAction(R.mipmap.ic_launcher, "Go To Better_Budgets", actionIntent)
+                .build();
+
+        notificationManager.notify(1, notification);
+    }
+
+    private void enteredDangerZone() {
+        int permission = ActivityCompat.checkSelfPermission(this.getApplicationContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION);
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
+        else {
+//            Boolean found = false;
+//            int count = 0;
+//            String current_name = "";
+//            while (!found) {
+//                mFusedLocationProviderClient.getLastLocation().addOnCompleteListener(this, task -> {
+//                    android.location.Location mLastKnownLocation = task.getResult();
+//                    if (task.isSuccessful() && mLastKnownLocation != null) {
+//                        currentLocation.setLat(String.valueOf(mLastKnownLocation.getLatitude()));
+//                        currentLocation.setLng(String.valueOf(mLastKnownLocation.getLongitude()));
+//                    }
+//                });
+//                Context context = getApplicationContext();
+//                SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("danger_zones",
+//                        Context.MODE_PRIVATE, null);
+//
+//                DBHelper_GPS dbHelper_gps = new DBHelper_GPS(sqLiteDatabase);
+//                dbHelper_gps.createTable();
+//                locations = dbHelper_gps.readLocations();
+//                for (Location location: locations) {
+//                    if (distance(Float.valueOf(currentLocation.getLat()),
+//                            Float.valueOf(currentLocation.getLng()),
+//                            location.getLatitude(), location.getLongitude(), "M") < 0.5) {
+//                        if (count == 0) {
+//                            count++;
+//                            current_name = location.getName();
+//                            break;
+//                        }
+//                        if (current_name.equals(location.getName())) {
+//                            if (count > 30000) {
+//                                sendOnChannel1();
+//                                found = false;
+//                            }
+//                        } else {
+//                            count = 0;
+//                        }
+//
+//                    }
+//                }
+//            }
+            sendOnChannel1();
+        }
+    }
+
+    private static float distance(float lat1, float lon1, float lat2, float lon2, String unit) {
+        if ((lat1 == lat2) && (lon1 == lon2)) {
+            return 0;
+        }
+        else {
+            float theta = lon1 - lon2;
+            double dist = Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(lat2))
+                    + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+                    * Math.cos(Math.toRadians(theta));
+            dist = Math.acos(dist);
+            dist = Math.toDegrees(dist);
+            dist = dist * 60 * 1.1515;
+            if (unit.equals("K")) {
+                dist = dist * 1.609344;
+            } else if (unit.equals("N")) {
+                dist = dist * 0.8684;
+            }
+            return (float) (dist);
+        }
     }
 
 

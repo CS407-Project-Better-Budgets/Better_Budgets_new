@@ -59,9 +59,6 @@ public class manage_data extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.item_goto_data_management:
-                Intent intent = new Intent(this, manage_data.class);
-                startActivity(intent);
             case R.id.item_goto_main_activity:
                 Intent intent2 = new Intent(this, MainActivity.class);
                 startActivity(intent2);

@@ -37,8 +37,9 @@ public class DBHelper {
         sqLiteDatabase.execSQL(String.format("UPDATE spending set source = '%s', date = '%s' , amount = '%f', seller = '%s' where id = '%s'", source, date, amount, seller, id));
     }
 
-    public ArrayList<Spending> showData() {
+    public ArrayList<Spending> showData_all() {
         createTable();
+
         Cursor c = sqLiteDatabase.rawQuery(String.format("SELECT * from spending"), null);
 
         int idIndex = c.getColumnIndex("id");
@@ -47,20 +48,24 @@ public class DBHelper {
         int amountIndex = c.getColumnIndex("amount");
         int sellerIndex = c.getColumnIndex("seller");
 
-        c.moveToFirst();
 
         ArrayList<Spending> spendingList = new ArrayList<>();
 
-        while (!c.isAfterLast()) {
-            String id = c.getString(idIndex);
-            String date = c.getString(dateIndex);
-            String source = c.getString(sourceIndex);
-            double amount = c.getDouble(amountIndex);
-            String seller = c.getString(sellerIndex);
+        if (c.moveToFirst()) {
+            while (!c.isAfterLast()) {
+                String id = c.getString(idIndex);
+                String date = c.getString(dateIndex);
+                String source = c.getString(sourceIndex);
+                double amount = c.getDouble(amountIndex);
+                String seller = c.getString(sellerIndex);
 
-            Spending spending = new Spending(id, date, source, amount, seller);
+                Spending spending = new Spending(id, date, source, amount, seller);
+                spendingList.add(spending);
+                c.moveToNext();
+            }
+        } else {
+            Spending spending = new Spending("", "", "", 0, "");
             spendingList.add(spending);
-            c.moveToNext();
         }
         c.close();
 
