@@ -46,11 +46,10 @@ public class manual_input extends AppCompatActivity {
                 empty_input();
             }
         }
-        cost_list.add(0,cost);
-        seller_list.add(0,seller);
-        date_list.add(0,date);
+        cost_list.add(cost);
+        seller_list.add(seller);
+        date_list.add(date);
         empty_input();
-        submit_input();
         Toast.makeText(this,"entry recorded", Toast.LENGTH_LONG).show();
     }
     public void empty_input (){
@@ -65,18 +64,18 @@ public class manual_input extends AppCompatActivity {
         month.setText("");
         year.setText("");
     }
-
-    public void submit_input (){
+    public void finish_manual(View view){
+        Toast.makeText(this,Integer.toString(date_list.size()),Toast.LENGTH_LONG).show();
         Context context = getApplicationContext();
         SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("spending", Context.MODE_PRIVATE, null);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
         DBHelper dbHelper = new DBHelper(sqLiteDatabase);
-        Date date = new Date();
-        String id = sdf.format(date);
-        dbHelper.addData(id, "manual", date_list.get(0),Float.parseFloat(cost_list.get(0)),seller_list.get(0));
-    }
-
-    public void finish_manual(View view){
+        for (int i = 0; i < cost_list.size(); i++){
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
+            Date date = new Date();
+            String id = sdf.format(date);
+            dbHelper.addData(id + Integer.toString(i), "manual", date_list.get(i),Double.parseDouble(cost_list.get(i)),seller_list.get(i));
+            //Toast.makeText(this,sql,Toast.LENGTH_LONG).show();
+        }
         Intent intent = new Intent(this, import_home.class);
         startActivity(intent);
     }
