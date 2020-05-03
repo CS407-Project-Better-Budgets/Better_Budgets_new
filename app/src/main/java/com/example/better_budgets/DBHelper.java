@@ -71,4 +71,78 @@ public class DBHelper {
 
         return spendingList;
     }
+
+    public ArrayList<Spending> showData_id(String input_id) {
+        createTable();
+
+        Cursor c = sqLiteDatabase.rawQuery(String.format("SELECT * from spending"), null);
+
+        int idIndex = c.getColumnIndex("id");
+        int dateIndex = c.getColumnIndex("date");
+        int sourceIndex = c.getColumnIndex("source");
+        int amountIndex = c.getColumnIndex("amount");
+        int sellerIndex = c.getColumnIndex("seller");
+
+
+        ArrayList<Spending> spendingList = new ArrayList<>();
+
+        if (c.moveToFirst()) {
+            while (!c.isAfterLast()) {
+                String id = c.getString(idIndex);
+                String date = c.getString(dateIndex);
+                String source = c.getString(sourceIndex);
+                double amount = c.getDouble(amountIndex);
+                String seller = c.getString(sellerIndex);
+
+                if (id.equals(input_id)){
+                    Spending spending = new Spending(id, date, source, amount, seller);
+                    spendingList.add(spending);
+                }
+                c.moveToNext();
+            }
+        } else {
+            Spending spending = new Spending("", "", "", 0, "");
+            spendingList.add(spending);
+        }
+        c.close();
+
+        return spendingList;
+    }
+
+    public ArrayList<Spending> showData_seller(String input_seller) {
+        createTable();
+
+        Cursor c = sqLiteDatabase.rawQuery(String.format("SELECT * from spending"), null);
+
+        int idIndex = c.getColumnIndex("id");
+        int dateIndex = c.getColumnIndex("date");
+        int sourceIndex = c.getColumnIndex("source");
+        int amountIndex = c.getColumnIndex("amount");
+        int sellerIndex = c.getColumnIndex("seller");
+
+
+        ArrayList<Spending> spendingList = new ArrayList<>();
+
+        if (c.moveToFirst()) {
+            while (!c.isAfterLast()) {
+                String id = c.getString(idIndex);
+                String date = c.getString(dateIndex);
+                String source = c.getString(sourceIndex);
+                double amount = c.getDouble(amountIndex);
+                String seller = c.getString(sellerIndex);
+
+                if (seller.equals(input_seller)){
+                    Spending spending = new Spending(id, date, source, amount, seller);
+                    spendingList.add(spending);
+                }
+                c.moveToNext();
+            }
+        } else {
+            Spending spending = new Spending("", "", "", 0, "");
+            spendingList.add(spending);
+        }
+        c.close();
+
+        return spendingList;
+    }
 }

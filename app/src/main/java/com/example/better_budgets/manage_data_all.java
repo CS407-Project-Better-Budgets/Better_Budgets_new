@@ -27,16 +27,10 @@ public class manage_data_all extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_data_all);
 
-        TextView title = findViewById(R.id.textView_md_all_title);
-
-
         Context context = getApplicationContext();
         SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("spending", Context.MODE_PRIVATE, null);
 
-
         DBHelper dbHelper = new DBHelper(sqLiteDatabase);
-
-
         spendings = dbHelper.showData_all();
 
         ArrayList<String> displaySpendings = new ArrayList<>();

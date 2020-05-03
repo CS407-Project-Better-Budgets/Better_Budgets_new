@@ -23,44 +23,54 @@
         android:id="@+id/editText_md_amount_lower"
         android:layout_width="160dp"
         android:layout_height="50dp"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:ems="10"
+        android:hint="Enter lower bound"
         android:inputType="textPersonName"
-        android:text="Enter lower bound"
         app:layout_constraintBottom_toTopOf="@+id/list_md_amount_spending"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_md_amount_title"
-        app:layout_constraintVertical_bias="0.5"/>
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/editText_md_amount_higher"
         android:layout_width="160dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
+        android:hint="Enter higher bound"
         android:inputType="textPersonName"
-        android:text="Enter higher bound"
         app:layout_constraintBottom_toTopOf="@+id/list_md_amount_spending"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_md_amount_title"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView_md_amount_to"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="2dp"
+        android:layout_marginTop="24dp"
         android:text="~"
         android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/list_md_amount_spending"
         app:layout_constraintEnd_toStartOf="@+id/editText_md_amount_higher"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toEndOf="@+id/editText_md_amount_lower"
         app:layout_constraintTop_toBottomOf="@+id/textView_md_amount_title" />
+
+    <Button
+        android:id="@+id/button_md_amount_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="Search"
+        android:onClick="searchOnClick"
+        app:layout_constraintBottom_toTopOf="@+id/list_md_amount_spending"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_md_amount_to" />
 
     <ListView
         android:id="@+id/list_md_amount_spending"
@@ -72,6 +82,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_md_amount_to" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -52,7 +52,7 @@ public class analysis_module extends AppCompatActivity {
         Date date = new Date();
         String id = sdf.format(date);
 
-        spendings = new DBHelper(sqLiteDatabase).showData();
+        spendings = new DBHelper(sqLiteDatabase).showData_all();
 
         if(spendings.isEmpty()){
             dataEntries.add(new ValueDataEntry("Example 1", 300 ));
