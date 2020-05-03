@@ -11,7 +11,6 @@
         android:id="@+id/textView_md_amount_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:text="View inputs by amount"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +30,8 @@
         android:text="Enter lower bound"
         app:layout_constraintBottom_toTopOf="@+id/list_md_amount_spending"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_md_amount_title" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_md_amount_title"
+        app:layout_constraintVertical_bias="0.5"/>
 
     <EditText
         android:id="@+id/editText_md_amount_higher"
@@ -45,7 +45,7 @@
         app:layout_constraintBottom_toTopOf="@+id/list_md_amount_spending"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_md_amount_title"
-        app:layout_constraintVertical_bias="0.48" />
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/textView_md_amount_to"

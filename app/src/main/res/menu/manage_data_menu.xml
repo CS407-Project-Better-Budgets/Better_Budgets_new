@@ -5,9 +5,11 @@
     <item
         android:id="@+id/item_goto_data_management"
         android:title="Manage Data homescreen"
+        app:showAsAction="never"
         />
     <item
         android:id="@+id/item_goto_main_activity"
         android:title="App Homescreen"
+        app:showAsAction="never"
         />
 </menu>
