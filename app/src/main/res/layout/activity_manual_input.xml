@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".manual_input">
 
+    <Button
+        android:id="@+id/manual_submit2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="finish_manual"
+        android:text="Finish"
+        app:layout_constraintBottom_toTopOf="@+id/back_manual"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/data_entry_manual_cost"
+        app:layout_constraintVertical_bias="0.77" />
+
     <EditText
         android:id="@+id/data_entry_manual_year"
         android:layout_width="37dp"
@@ -94,10 +107,11 @@
         android:onClick="back_manual"
         android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/data_entry_manual_cost"
-        app:layout_constraintVertical_bias="0.6" />
+        app:layout_constraintVertical_bias="0.765" />
 
     <TextView
         android:id="@+id/text_manual_input"
@@ -131,12 +145,11 @@
         android:layout_height="wrap_content"
         android:onClick="submit_manual"
         android:text="Submit"
-        app:layout_constraintBottom_toTopOf="@+id/back_manual"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintBottom_toTopOf="@+id/manual_submit2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/data_entry_manual_cost"
-        app:layout_constraintVertical_bias="0.49" />
+        app:layout_constraintVertical_bias="0.511" />
 
     <TextView
         android:id="@+id/cost_pmt"
