@@ -62,8 +62,8 @@
 
     <ListView
         android:id="@+id/list_md_source_spending"
-        android:layout_width="338dp"
-        android:layout_height="375dp"
+        android:layout_width="300dp"
+        android:layout_height="500dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

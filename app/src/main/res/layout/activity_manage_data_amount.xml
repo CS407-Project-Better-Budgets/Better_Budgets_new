@@ -18,13 +18,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <EditText
         android:id="@+id/editText_md_amount_lower"
         android:layout_width="160dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Enter lower bound"
         android:inputType="textPersonName"
@@ -37,7 +35,6 @@
         android:id="@+id/editText_md_amount_higher"
         android:layout_width="160dp"
         android:layout_height="50dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="Enter higher bound"
@@ -52,11 +49,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:text="~"
         android:textSize="25sp"
         app:layout_constraintEnd_toStartOf="@+id/editText_md_amount_higher"
-        app:layout_constraintHorizontal_bias="0.475"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/editText_md_amount_lower"
         app:layout_constraintTop_toBottomOf="@+id/textView_md_amount_title" />
 
@@ -64,7 +61,6 @@
         android:id="@+id/button_md_amount_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
         android:onClick="searchOnClick"
         android:text="Search"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,14 +71,13 @@
         android:id="@+id/list_md_amount_spending"
         android:layout_width="300dp"
         android:layout_height="500dp"
-        android:layout_marginTop="31dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_md_amount_search"
-        app:layout_constraintVertical_bias="0.792" />
+        app:layout_constraintTop_toBottomOf="@+id/button_md_amount_search" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
