@@ -62,8 +62,8 @@ public class manage_data_date extends AppCompatActivity {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent(getApplicationContext(), edit_input.class);
-                    intent.putExtra("id", position);
+                    Intent intent = new Intent(getApplicationContext(), manage_data_date_edit.class);
+                    intent.putExtra("spendid", position);
 
                     startActivity(intent);
                 }
