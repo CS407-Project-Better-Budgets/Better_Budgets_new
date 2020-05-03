@@ -29,20 +29,20 @@ public class manage_data_id extends AppCompatActivity {
 
     public void searchOnClick(View view){
         EditText id_temp = findViewById(R.id.editText_md_id_id);
-        String id = id_temp.toString();
+        String id = id_temp.getText().toString();
 
         if (id != null) {
             Context context = getApplicationContext();
             SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("spending", Context.MODE_PRIVATE, null);
 
             DBHelper dbHelper = new DBHelper(sqLiteDatabase);
+
             spendings = dbHelper.showData_all();
 
             ArrayList<String> displaySpendings = new ArrayList<>();
             for (Spending spending: spendings) {
-                if (spending.getId().equals(id)) {
+                if (spending.getId().equalsIgnoreCase(id)) {
                     displaySpendings.add(String.format("id:%s\nDate:%s\nSource:%s\nAmount:%f\nSeller:%s", spending.getId(), spending.getDate(), spending.getSource(), spending.getAmount(), spending.getSeller()));
-
                 }
             }
 
