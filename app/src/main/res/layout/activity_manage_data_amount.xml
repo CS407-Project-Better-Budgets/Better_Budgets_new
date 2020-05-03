@@ -65,9 +65,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
-        android:text="Search"
         android:onClick="searchOnClick"
-        app:layout_constraintBottom_toTopOf="@+id/list_md_amount_spending"
+        android:text="Search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_md_amount_to" />
@@ -76,14 +75,14 @@
         android:id="@+id/list_md_amount_spending"
         android:layout_width="300dp"
         android:layout_height="500dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="31dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_md_amount_to" />
-
-
+        app:layout_constraintTop_toBottomOf="@+id/button_md_amount_search"
+        app:layout_constraintVertical_bias="0.792" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

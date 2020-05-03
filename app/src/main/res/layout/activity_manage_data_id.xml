@@ -22,36 +22,36 @@
         android:id="@+id/editText_md_id_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Enter the data id here"
-        app:layout_constraintBottom_toTopOf="@+id/list_md_id_spending"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_md_id_title"
-        app:layout_constraintVertical_bias="0.3"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView_md_id_title" />
 
     <Button
         android:id="@+id/button_md_id_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Search"
+        android:layout_marginTop="10dp"
         android:onClick="searchOnClick"
-        app:layout_constraintBottom_toTopOf="@+id/list_md_id_spending"
+        android:text="Search"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_md_id_id"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/editText_md_id_id" />
 
     <ListView
         android:id="@+id/list_md_id_spending"
         android:layout_width="348dp"
         android:layout_height="406dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_md_id_search" />
 
 
 

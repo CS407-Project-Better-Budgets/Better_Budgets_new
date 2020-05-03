@@ -27,7 +27,6 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Enter the seller name here"
-        app:layout_constraintBottom_toTopOf="@+id/list_md_seller_spending"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_md_seller_title" />
@@ -36,21 +35,24 @@
         android:id="@+id/button_md_seller_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:onClick="searchOnClick"
         android:text="Search"
-        app:layout_constraintBottom_toTopOf="@+id/list_md_seller_spending"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_md_seller_seller" />
 
     <ListView
         android:id="@+id/list_md_seller_spending"
-        android:layout_width="328dp"
-        android:layout_height="423dp"
+        android:layout_width="300dp"
+        android:layout_height="500dp"
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_md_seller_search"
+        app:layout_constraintVertical_bias="0.8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
