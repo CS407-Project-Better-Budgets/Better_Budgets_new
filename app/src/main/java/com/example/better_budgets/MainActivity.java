@@ -26,12 +26,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 public class MainActivity extends AppCompatActivity {
-    public static Boolean danger_zone = false;
+    public static Boolean danger_zone = true;
     public SQLiteDatabase sqLiteDatabase;
     public DBHelper helper;
     private NotificationManagerCompat notificationManager;
@@ -56,10 +57,8 @@ public class MainActivity extends AppCompatActivity {
         final Button button = findViewById(R.id.danger_zone_switch);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                danger_zone = !danger_zone;
+
                 if(danger_zone){
-                    TextView danger_switch_text = (TextView)findViewById(R.id.danger_switch_text);
-                    danger_switch_text.setText("Danger zone function: on");
                     enteredDangerZone();
                 }
                 else{
@@ -68,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
     }
 
     public void click_danger(View view){
@@ -205,58 +206,43 @@ public class MainActivity extends AppCompatActivity {
         int permission = ActivityCompat.checkSelfPermission(this.getApplicationContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION);
         if (permission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        }
-        else {
-//            Boolean found = false;
-//            int count = 0;
-//            String current_name = "";
-//            while (!found) {
-//                mFusedLocationProviderClient.getLastLocation().addOnCompleteListener(this, task -> {
-//                    android.location.Location mLastKnownLocation = task.getResult();
-//                    if (task.isSuccessful() && mLastKnownLocation != null) {
-//                        currentLocation.setLat(String.valueOf(mLastKnownLocation.getLatitude()));
-//                        currentLocation.setLng(String.valueOf(mLastKnownLocation.getLongitude()));
-//                    }
-//                });
-//                Context context = getApplicationContext();
-//                SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("danger_zones",
-//                        Context.MODE_PRIVATE, null);
-//
-//                DBHelper_GPS dbHelper_gps = new DBHelper_GPS(sqLiteDatabase);
-//                dbHelper_gps.createTable();
-//                locations = dbHelper_gps.readLocations();
-//                for (Location location: locations) {
-//                    if (distance(Float.valueOf(currentLocation.getLat()),
-//                            Float.valueOf(currentLocation.getLng()),
-//                            location.getLatitude(), location.getLongitude(), "M") < 0.5) {
-//                        if (count == 0) {
-//                            count++;
-//                            current_name = location.getName();
-//                            break;
-//                        }
-//                        if (current_name.equals(location.getName())) {
-//                            if (count > 30000) {
-//                                sendOnChannel1();
-//                                found = false;
-//                            }
-//                        } else {
-//                            count = 0;
-//                        }
-//
-//                    }
-//                }
-//            }
-            sendOnChannel1();
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        } else {
+            mFusedLocationProviderClient.getLastLocation().addOnCompleteListener(this, task -> {
+                android.location.Location mLastKnownLocation = task.getResult();
+                if (task.isSuccessful() && mLastKnownLocation != null) {
+                    currentLocation.setLat(String.valueOf(mLastKnownLocation.getLatitude()));
+                    currentLocation.setLng(String.valueOf(mLastKnownLocation.getLongitude()));
+                }
+            });
+            Context context = getApplicationContext();
+            SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("danger_zones",
+                    Context.MODE_PRIVATE, null);
+
+            DBHelper_GPS dbHelper_gps = new DBHelper_GPS(sqLiteDatabase);
+            dbHelper_gps.createTable();
+            locations = dbHelper_gps.readLocations();
+            for (Location location : locations) {
+                if (currentLocation.getLat() == null ||
+                        currentLocation.getLng() == null) {
+                    return;
+                }
+                if (Math.abs(distance(Double.parseDouble(currentLocation.getLat()),
+                        Double.parseDouble(currentLocation.getLng()),
+                        (double) location.getLatitude(), (double) location.getLongitude(), "M")) < 0.5) {
+                    sendOnChannel1();
+                }
+            }
         }
     }
 
-    private static float distance(float lat1, float lon1, float lat2, float lon2, String unit) {
+    public static float distance(double lat1, double lon1, double lat2,
+                                 double lon2, String unit) {
         if ((lat1 == lat2) && (lon1 == lon2)) {
             return 0;
         }
         else {
-            float theta = lon1 - lon2;
+            double theta = lon1 - lon2;
             double dist = Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(lat2))
                     + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
                     * Math.cos(Math.toRadians(theta));
@@ -269,6 +255,14 @@ public class MainActivity extends AppCompatActivity {
                 dist = dist * 0.8684;
             }
             return (float) (dist);
+        }
+    }
+
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                enteredDangerZone();
+            }
         }
     }
 

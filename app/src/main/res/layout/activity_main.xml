@@ -60,10 +60,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.2" />
 
-    <Switch
+    <Button
         android:id="@+id/danger_zone_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Check"
         app:layout_constraintBottom_toTopOf="@id/danger_zone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -73,7 +74,7 @@
         android:id="@+id/danger_switch_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Danger zone function: off"
+        android:text="Check if you are in a danger zone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
