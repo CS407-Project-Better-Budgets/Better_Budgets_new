@@ -65,7 +65,7 @@ public class manual_input extends AppCompatActivity {
         year.setText("");
     }
     public void finish_manual(View view){
-        Toast.makeText(this,Integer.toString(date_list.size()),Toast.LENGTH_LONG).show();
+       // Toast.makeText(this,Integer.toString(date_list.size()),Toast.LENGTH_LONG).show();
         Context context = getApplicationContext();
         SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("spending", Context.MODE_PRIVATE, null);
         DBHelper dbHelper = new DBHelper(sqLiteDatabase);
