@@ -66,6 +66,9 @@ public class manage_data_amount_edit extends AppCompatActivity {
         DBHelper dbHelper = new DBHelper(sqLiteDatabase);
 
         dbHelper.updateData(id, source, date, amount, seller);
+
+        Intent intent = new Intent(this, manage_data.class);
+        startActivity(intent);
     }
 
     public void deleteOnClick(View view) {
