@@ -38,7 +38,7 @@ public class credit_card_input_list extends AppCompatActivity {
             double amount = Double.parseDouble(scan.next());
             String date = scan.next();
             //Toast.makeText(this, Double.toString(amount), Toast.LENGTH_SHORT).show();
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddhhmmss");
             LocalDateTime now = LocalDateTime.now();
             String id = dtf.format(now).replaceAll(" ", "")+Integer.toString(i);
             dbHelper.addData(id,"credit_card",date,amount,seller);
