@@ -25,6 +25,8 @@ public class analysis_module extends AppCompatActivity {
     //this module will give users some useful analysis of their spending
     //this module is quite open-use your creativity!
 
+    // Pie chart base was acquired from https://github.com/AnyChart/AnyChart-Android
+
     AnyChartView anyChartView;
 
     public static ArrayList<Spending> spendings = new ArrayList<>();
