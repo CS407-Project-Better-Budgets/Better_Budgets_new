@@ -78,13 +78,23 @@ public class manage_data_amount extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_goto_data_management:
-                Intent intent = new Intent(this, manage_data.class);
-                startActivity(intent);
+                goToDataManagementHome();
+                return true;
             case R.id.item_goto_main_activity:
-                Intent intent2 = new Intent(this, MainActivity.class);
-                startActivity(intent2);
+                goToMainActivity();
+                return true;
             default: return super.onOptionsItemSelected(item);
         }
 
+    }
+
+    public void goToMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToDataManagementHome() {
+        Intent intent = new Intent(this, manage_data.class);
+        startActivity(intent);
     }
 }
