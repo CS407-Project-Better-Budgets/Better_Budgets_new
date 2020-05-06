@@ -125,7 +125,7 @@ public class credit_card_input extends AppCompatActivity {
                         }
                     }
                     date = month+day+year;
-                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddhhmmss");
                     LocalDateTime now = LocalDateTime.now();
                     id = dtf.format(now).replaceAll(" ", "")+Integer.toString(i);
                     spd_list.add(new Spending(id, date,"credit_card",amount,seller));
