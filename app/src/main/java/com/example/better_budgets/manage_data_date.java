@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 public class manage_data_date extends AppCompatActivity {
     public static ArrayList<Spending> spendings = new ArrayList<>();
+    public static ArrayList<Spending> spendings_amount = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class manage_data_date extends AppCompatActivity {
     }
 
     public void searchOnClick(View view){
+        spendings_amount.clear();
         EditText month_temp = findViewById(R.id.editText_md_date_month);
         String month = month_temp.getText().toString();
 
@@ -52,6 +54,7 @@ public class manage_data_date extends AppCompatActivity {
             for (Spending spending: spendings) {
                 if (spending.getDate().equalsIgnoreCase(mmddyyyy)) {
                     displaySpendings.add(String.format("id:%s\nDate:%s\nSource:%s\nAmount:%f\nSeller:%s", spending.getId(), spending.getDate(), spending.getSource(), spending.getAmount(), spending.getSeller()));
+                    spendings_amount.add(spending);
                 }
             }
 

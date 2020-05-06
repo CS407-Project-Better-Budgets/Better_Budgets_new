@@ -19,3 +19,5 @@ public class Spending {
     public double getAmount(){return amount;}
     public String getSeller(){return seller;}
 }
+
+

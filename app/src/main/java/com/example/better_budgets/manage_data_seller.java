@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 public class manage_data_seller extends AppCompatActivity {
     public static ArrayList<Spending> spendings = new ArrayList<>();
+    public static ArrayList<Spending> spendings_seller = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class manage_data_seller extends AppCompatActivity {
     }
 
     public void searchOnClick(View view){
+        spendings_seller.clear();
         EditText seller_temp = findViewById(R.id.editText_md_seller_seller);
         String seller = seller_temp.getText().toString();
 
@@ -44,6 +46,7 @@ public class manage_data_seller extends AppCompatActivity {
             for (Spending spending: spendings) {
                 if (spending.getSeller().equalsIgnoreCase(seller)) {
                     displaySpendings.add(String.format("id:%s\nDate:%s\nSource:%s\nAmount:%f\nSeller:%s", spending.getId(), spending.getDate(), spending.getSource(), spending.getAmount(), spending.getSeller()));
+                    spendings_seller.add(spending);
                 }
             }
 

@@ -32,7 +32,7 @@ public class manage_data_id_edit extends AppCompatActivity {
         spendingid = intent.getIntExtra("spendingid", -1);
 
         if (spendingid != -1) {
-            Spending spending = manage_data_id.spendings.get(spendingid);
+            Spending spending = manage_data_id.spendings_id.get(spendingid);
             String id = spending.getId();
             String date = spending.getDate();
             String source = spending.getSource();

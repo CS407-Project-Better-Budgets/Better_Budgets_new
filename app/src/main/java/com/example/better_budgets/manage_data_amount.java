@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 public class manage_data_amount extends AppCompatActivity {
     public static ArrayList<Spending> spendings = new ArrayList<>();
+    public static ArrayList<Spending> spendings_amount = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class manage_data_amount extends AppCompatActivity {
     }
 
     public void searchOnClick(View view){
+        spendings_amount.clear();
         EditText low_temp = findViewById(R.id.editText_md_amount_lower);
         String low = low_temp.getText().toString();
         double lower_value= Double.parseDouble(low);
@@ -45,9 +47,12 @@ public class manage_data_amount extends AppCompatActivity {
             spendings = dbHelper.showData_all();
 
             ArrayList<String> displaySpendings = new ArrayList<>();
+            ArrayList<Spending> filteredSpendings = new ArrayList<>();
+
             for (Spending spending: spendings) {
                 if ((spending.getAmount() <= higher_value) && (spending.getAmount() >= lower_value)) {
                     displaySpendings.add(String.format("id:%s\nDate:%s\nSource:%s\nAmount:%f\nSeller:%s", spending.getId(), spending.getDate(), spending.getSource(), spending.getAmount(), spending.getSeller()));
+                    spendings_amount.add(spending);
                 }
             }
 

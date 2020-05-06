@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 public class manage_data_source extends AppCompatActivity {
     public static ArrayList<Spending> spendings = new ArrayList<>();
+    public static ArrayList<Spending> spendings_source = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class manage_data_source extends AppCompatActivity {
     }
 
     public void manualOnClick(View view){
+        spendings_source.clear();
         Context context = getApplicationContext();
         SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("spending", Context.MODE_PRIVATE, null);
 
@@ -47,6 +49,7 @@ public class manage_data_source extends AppCompatActivity {
         for (Spending spending: spendings) {
             if (spending.getSource().equalsIgnoreCase("manual")) {
                 displaySpendings.add(String.format("id:%s\nDate:%s\nSource:%s\nAmount:%f\nSeller:%s", spending.getId(), spending.getDate(), spending.getSource(), spending.getAmount(), spending.getSeller()));
+                spendings_source.add(spending);
             }
         }
 
@@ -66,6 +69,7 @@ public class manage_data_source extends AppCompatActivity {
     }
 
     public void messageOnClick(View view){
+        spendings_source.clear();
         Context context = getApplicationContext();
         SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("spending", Context.MODE_PRIVATE, null);
 
@@ -77,6 +81,7 @@ public class manage_data_source extends AppCompatActivity {
         for (Spending spending: spendings) {
             if (spending.getSource().equalsIgnoreCase("credit_card")) {
                 displaySpendings.add(String.format("id:%s\nDate:%s\nSource:%s\nAmount:%f\nSeller:%s", spending.getId(), spending.getDate(), spending.getSource(), spending.getAmount(), spending.getSeller()));
+                spendings_source.add(spending);
             }
         }
 
